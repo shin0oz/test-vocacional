@@ -1,0 +1,698 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle, #9bb5d8d2, #466796d1);
+}
+
+.contenedor {
+    width: 280px;        
+    max-width: 90%;
+    margin: auto;        
+
+    background: white;
+    padding: 20px;       
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    background-color: #1f3b6d;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.main {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.texto-header {
+    text-align: center;
+}
+
+.texto-header h2 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.texto-header h1 {
+    margin: 3px 0 0 0;
+    font-size: 18px;
+}
+
+.logo-izq {
+    width: 60px;
+    position: absolute;
+    left: 15px;
+}
+
+.logo-der {
+    width: 60px;
+    position: absolute;
+    right: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding-left: 12px;
+    outline: none;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #4facfe;
+    box-shadow: 0px 0px 5px rgba(79, 172, 254, 0.6);
+}
+
+button {
+    background: #88A0BF;
+    border: none;
+    padding: 10px;
+    width: 180px;
+    color: black;
+    font-size: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background: rgba(26, 59, 104, 0.8);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card{
+
+    width: 90%;
+    max-width: 150px;
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    margin: 40px auto;
+    box-sizing: border-box;
+    min-height: 150px;
+
+}
+
+.modalidad {
+    text-align: center;
+}
+
+.tituloModalidad {
+    font-size: 18px;
+    color: #0C2240;
+    margin-bottom: 10px;
+}
+
+#contenedorPreguntas {
+    margin-top: 10px;
+}
+
+.pregunta p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #0C2240;
+}
+
+.opcion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.opcion input {
+    width: auto;
+}
+
+.barra {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+#progreso {
+    height: 100%;
+    width: 0%;
+    background: #4facfe;
+    transition: 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.main {
+    width: 100%;
+    padding: 10px;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.logo-izq,
+.logo-der {
+    width: 60px;
+}
+
+.texto-header {
+    width: 100%;
+}
+
+.texto-header h1 {
+    font-size: 18px;
+}
+
+.texto-header h2 {
+    font-size: 14px;
+}
+
+.card {
+    overflow: hidden;
+
+}
+
+.contenedorResultado {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.tarjetaCarrera {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+
+    .logo-izq,
+    .logo-der {
+        width: 50px;
+    }
+
+    .texto-header h1 {
+        font-size: 16px;
+    }
+
+    .texto-header h2 {
+        font-size: 12px;
+    }
+
+}
+
+/* ===== ESTILO PREGUNTAS MODERNAS ===== */
+.pregunta {
+    width: 100%;
+    animation: fadeIn 0.5s ease;
+    padding-bottom: 20px;
+}
+
+/* NUMERO */
+.numero {
+    display: inline-block;
+    background: #466796;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* TEXTO PREGUNTA */
+.textoPregunta {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0C2240;
+    margin-bottom: 20px;
+}
+
+/* OPCIONES */
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* CAJAS */
+.opcionBox {
+    background: #e4ecf7;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+/* LETRA A B C */
+.opcionBox span {
+    background: #466796;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* HOVER */
+.opcionBox:hover {
+    background: #d6e4f5;
+    transform: scale(1.02);
+}
+
+/* SELECCIONADO */
+.opcionBox input:checked+span {
+    background: #0C2240;
+}
+
+.opcionBox input:checked~* {
+    color: #0C2240;
+}
+
+.opcionBox input:checked {
+    accent-color: #466796;
+}
+
+/* OCULTAR RADIO */
+.opcionBox input {
+    display: none;
+}
+
+/* BOTON */
+.btnAceptar {
+    width: 100%;
+    padding: 18px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 15px;
+    background: #4b6fa9;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    box-sizing: border-box;
+}
+
+.btnAceptar:hover {
+    background: #2f4f7a;
+    transform: scale(1.05);
+}
+
+/* FONDO */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #9bb5d8, #466796);
+    animation: fadeIn 1s ease-in;
+}
+
+/* CONTENEDOR */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 40px;
+}
+
+/* TEXTO */
+.hero-text {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 450px;
+    /* MÁS PEQUEÑO */
+    height: 320px;
+    /* MISMA ALTURA QUE IMAGEN */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: slideLeft 1s ease;
+}
+
+/* TEXTO MÁS EQUILIBRADO */
+.hero-text h1 {
+    font-size: 38px;
+    /* MÁS CHICO */
+    margin: 0;
+    line-height: 1.2;
+    color: #111;
+}
+
+/* RESALTADO */
+.hero-text span {
+    color: #466796;
+}
+
+/* BOTÓN */
+.hero-text button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #466796;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-text button:hover {
+    background: #2f4f7a;
+    transform: scale(1.05);
+}
+
+/* IMAGEN */
+.hero-img {
+    width: 450px;
+    height: 320px;
+    /* MISMO TAMAÑO */
+    animation: slideRight 1s ease;
+}
+
+.hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* SALIDA */
+.fadeOut {
+    animation: desaparecer 0.5s forwards;
+}
+
+@keyframes desaparecer {
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .hero-text,
+    .hero-img {
+        width: 90%;
+        height: auto;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+}
+
+/* GALERÍA TIPO SLIDER REAL */
+.galeriaCarrera {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 250px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #ddd;
+}
+
+/* IMAGEN */
+.galeriaCarrera img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    margin: 0;
+}
+
+/* FLECHAS NEGRAS COMO TU EJEMPLO */
+.galeriaCarrera .flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 60px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    line-height: 1;
+    overflow: hidden;
+}
+
+/* IZQUIERDA */
+.galeriaCarrera .flecha.izq {
+    left: 0;
+}
+
+/* DERECHA */
+.galeriaCarrera .flecha.der {
+    right: 0;
+}
+
+/* HOVER */
+.galeriaCarrera .flecha:hover {
+    background: #111;
+    color: white;
+    transform: translateY(-50%);
+}
+
+/* QUITA EFECTOS GENERALES SOLO A FLECHAS */
+.galeriaCarrera .flecha::after {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width:600px) {
+
+    .galeriaCarrera {
+        max-width: 300px;
+        height: 180px;
+    }
+
+    .galeriaCarrera .flecha {
+        width: 32px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+}
+
+.testCard{
+    width: 100%;
+    max-width: 850px;
+}
+
+.card{
+    width: 100%;
+    max-width: 850px;
+    box-sizing: border-box;
+}
+
+.opciones{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.opcionBox{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btnAceptar{
+    width: 100%;
+}
+
+.botonesCarreras{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin-top:30px;
+}
+
+.botonesCarreras button{
+    width:100%;
+    box-sizing:border-box;
+}
+
+@media(max-width:700px){
+
+    .card{
+        width:95%;
+        padding:20px;
+    }
+
+}
+.carrusel{
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.slides{
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slides img{
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.anterior,
+.siguiente{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    background: rgba(0,0,0,0.5);
+    color: white;
+
+    border: none;
+    padding: 8px 12px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    border-radius: 8px;
+
+    width: auto;
+    height: auto;
+
+    transition: 0.3s;
+}
+
+.anterior{
+    left: 10px;
+}
+
+.siguiente{
+    right: 10px;
+}
+
+.anterior:hover,
+.siguiente:hover{
+    background: rgba(0,0,0,0.8);
+}
