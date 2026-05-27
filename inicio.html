@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="css/estilo.css?v=1">
+</head>
+
+<body>
+
+    <header>
+        <img src="TecNM_logo.png" class="logo-izq">
+
+        <div class="texto-header">
+            <h2>SII SISTEMA INTEGRAL DE INFORMACIÓN</h2>
+            <h1>TecNM CAMPUS ATITALAQUIA</h1>
+        </div>
+
+        <img src="imgEscudo.png" class="logo-der">
+    </header>
+
+    <div class="hero">
+
+        <!-- TEXTO -->
+        <div class="hero-text" id="pantalla">
+
+            <h1>
+                ¿No sabes qué <br>
+                carrera <span>va contigo</span>?<br>
+                ¡Descúbrelo con este <span>test vocacional del TecNM</span>!
+            </h1>
+
+            <button onclick="irAlTest()">Hacer el test</button>
+
+            <!-- BOTON VOZ -->
+            <button onclick="leerTexto()" class="btnVoz">
+                🔊 Escuchar información
+            </button>
+
+        </div>
+        <div class="hero-img">
+
+            <div class="carrusel">
+
+                <div class="slides" id="slides">
+
+                    <img src="itat.jpg">
+
+                    <img src="quim1.png">
+                    <img src="inds1.png">
+                    <img src="meca1.png">
+                    <img src="sis1.png">
+
+                </div>
+
+                <button class="anterior" onclick="moverSlide(-1)">❮</button>
+                <button class="siguiente" onclick="moverSlide(1)">❯</button>
+
+            </div>
+
+        </div>
+
+        <script>
+
+            function irAlTest() {
+
+                let pantalla = document.getElementById("pantalla");
+
+                pantalla.classList.add("fadeOut");
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 500);
+
+            }
+
+            // CARRUSEL
+
+            let index = 0;
+
+            function moverSlide(direccion) {
+
+                const slides = document.getElementById("slides");
+
+                const total = slides.children.length;
+
+                index += direccion;
+
+                if (index < 0) {
+                    index = total - 1;
+                }
+
+                if (index >= total) {
+                    index = 0;
+                }
+
+                slides.style.transform = `translateX(-${index * 100}%)`;
+            }
+
+
+            // VOZ
+            function leerTexto() {
+
+                speechSynthesis.cancel();
+
+                let texto = "No sabes qué carrera va contigo. Descúbrelo con este test vocacional del Tecnológico Nacional de México Campus Atitalaquia.";
+
+                let voz = new SpeechSynthesisUtterance(texto);
+
+                voz.lang = "es-MX";
+                voz.volume = 1;
+                voz.rate = 1;
+                voz.pitch = 1;
+
+                window.speechSynthesis.speak(voz);
+
+            }
+
+        </script>
+
+</body>
+
+</html>

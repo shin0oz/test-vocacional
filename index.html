@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST VOCACIONAL</title>
+    <link rel="stylesheet" href="css/estilo.css?v=5">
+</head>
+
+<body>
+
+    <header>
+        <img src="TecNM_logo.png" class="logo-izq">
+
+        <div class="texto-header">
+            <h2>SII SISTEMA INTEGRAL DE INFORMACIÓN</h2>
+            <h1>TecNM CAMPUS ATITALAQUIA</h1>
+        </div>
+
+        <img src="imgEscudo.png" class="logo-der">
+    </header>
+
+    <div class="main">
+
+        <div id="registro" class="card">
+
+            <label>Nombre completo</label>
+            <input type="text" id="nombre" maxlength="60">
+
+            <label>Edad</label>
+            <input type="number" id="edad" min="17" max="45">
+
+            <button onclick="app.iniciarTest()">Comenzar Test</button>
+            <button onclick="leerTexto()" class="btnVoz">
+                🔊 Escuchar instrucciones</button>
+        </div>
+
+
+        <div id="modalidad" style="display:none">
+
+            <div class="card modalidad">
+
+                <h2 class="tituloModalidad">Selecciona la modalidad</h2>
+
+                <button onclick="app.seleccionarModalidad('virtual')">
+                    Virtual
+                </button>
+
+                <button onclick="app.seleccionarModalidad('presencial')">
+                    Presencial
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="test" style="display:none">
+
+            <div class="card testCard">
+
+                <div class="barra">
+                    <div id="progreso"></div>
+                </div>
+
+                <div id="contenedorPreguntas"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        class TestVocacional {
+
+            constructor() {
+
+                this.modalidad = "";
+                this.paso = 0;
+                this.preguntas = [];
+
+                this.puntajes = {
+                    quimica: 0,
+                    industrial: 0,
+                    mecatronica: 0,
+                    sistemas: 0,
+                    administracion: 0,
+                    gestion: 0
+                };
+
+                this.preguntasVirtual = [
+
+                    {
+                        texto: "¿Te gusta resolver problemas usando lógica?",
+                        carrera: "sistemas"
+                    },
+
+                    {
+                        texto: "¿Te interesa la programación y la tecnología?",
+                        carrera: "sistemas"
+                    },
+
+                    {
+                        texto: "¿Te gustaría administrar empresas o proyectos?",
+                        carrera: "gestion"
+                    },
+
+                    {
+                        texto: "¿Te gusta liderar equipos de trabajo?",
+                        carrera: "gestion"
+                    },
+
+                    {
+                        texto: "¿Te interesa mejorar procesos industriales?",
+                        carrera: "industrial"
+                    },
+
+                    {
+                        texto: "¿Te gusta analizar datos y productividad?",
+                        carrera: "industrial"
+                    },
+
+                    {
+                        texto: "¿Te gustaría crear aplicaciones o páginas web?",
+                        carrera: "sistemas"
+                    },
+
+                    {
+                        texto: "¿Te gusta organizar actividades empresariales?",
+                        carrera: "gestion"
+                    }
+
+                ];
+
+                this.preguntasPresencial = [
+
+                    {
+                        texto: "¿Te gusta trabajar en laboratorios?",
+                        carrera: "quimica"
+                    },
+
+                    {
+                        texto: "¿Te interesa la automatización y robótica?",
+                        carrera: "mecatronica"
+                    },
+
+                    {
+                        texto: "¿Te gusta programar computadoras?",
+                        carrera: "sistemas"
+                    },
+
+                    {
+                        texto: "¿Te interesa la administración de empresas?",
+                        carrera: "administracion"
+                    },
+
+                    {
+                        texto: "¿Te gusta optimizar procesos industriales?",
+                        carrera: "industrial"
+                    },
+
+                    {
+                        texto: "¿Te llaman la atención los procesos químicos?",
+                        carrera: "quimica"
+                    },
+
+                    {
+                        texto: "¿Te gustaría diseñar máquinas inteligentes?",
+                        carrera: "mecatronica"
+                    },
+
+                    {
+                        texto: "¿Te gusta crear software o sistemas?",
+                        carrera: "sistemas"
+                    },
+
+                    {
+                        texto: "¿Te interesa dirigir negocios o empresas?",
+                        carrera: "administracion"
+                    },
+
+                    {
+                        texto: "¿Te gusta trabajar con producción industrial?",
+                        carrera: "industrial"
+                    }
+
+                ];
+
+            }
+
+            iniciarTest() {
+
+                const nombre = document.getElementById("nombre").value.trim();
+                const edad = parseInt(document.getElementById("edad").value);
+
+                if (nombre.length < 5) {
+                    alert("Escribe tu nombre completo");
+                    return;
+                }
+
+                if (nombre.split(" ").length < 2) {
+                    alert("Debes escribir nombre y apellido");
+                    return;
+                }
+
+                if (!isNaN(nombre)) {
+                    alert("El nombre no puede contener solo números");
+                    return;
+                }
+
+                if (isNaN(edad)) {
+                    alert("Escribe tu edad");
+                    return;
+                }
+
+                if (edad < 17 || edad > 45) {
+                    alert("La edad debe estar entre 17 y 45 años");
+                    return;
+                }
+
+                localStorage.setItem("nombreAlumno", nombre);
+
+                document.getElementById("registro").style.display = "none";
+                document.getElementById("modalidad").style.display = "block";
+
+            }
+
+            seleccionarModalidad(tipo) {
+
+                this.modalidad = tipo;
+                this.paso = 0;
+
+                this.reiniciarPuntajes();
+
+                if (tipo === "virtual") {
+                    this.preguntas = [...this.preguntasVirtual];
+                }
+                else {
+                    this.preguntas = [...this.preguntasPresencial];
+                }
+
+                this.mezclarPreguntas(this.preguntas);
+
+                document.getElementById("modalidad").style.display = "none";
+                document.getElementById("test").style.display = "block";
+
+                this.mostrarPregunta();
+
+            }
+
+            mezclarPreguntas(array) {
+
+                for (let i = array.length - 1; i > 0; i--) {
+
+                    let j = Math.floor(Math.random() * (i + 1));
+
+                    [array[i], array[j]] = [array[j], array[i]];
+
+                }
+
+            }
+
+            mostrarPregunta() {
+
+                if (this.paso >= this.preguntas.length) {
+                    this.calcularResultado();
+                    return;
+                }
+
+                const pregunta = this.preguntas[this.paso];
+
+                document.getElementById("contenedorPreguntas").innerHTML = `
+
+        <div class="pregunta">
+
+            <div class="numero">${this.paso + 1}</div>
+
+            <p class="textoPregunta">${pregunta.texto}</p>
+
+            <div class="opciones">
+
+                <label class="opcionBox">
+                    <input type="radio" name="resp" value="3">
+                    <span>A</span> Sí
+                </label>
+
+                <label class="opcionBox">
+                    <input type="radio" name="resp" value="2">
+                    <span>B</span> Tal vez
+                </label>
+
+                <label class="opcionBox">
+                    <input type="radio" name="resp" value="0">
+                    <span>C</span> No
+                </label>
+
+            </div>
+
+            <button class="btnAceptar" onclick="app.siguiente()">
+                Siguiente
+            </button>
+
+        </div>
+
+        `;
+
+                this.actualizarBarra();
+
+            }
+
+            siguiente() {
+
+                const respuesta = document.querySelector('input[name="resp"]:checked');
+
+                if (!respuesta) {
+                    alert("Selecciona una respuesta");
+                    return;
+                }
+
+                const pregunta = this.preguntas[this.paso];
+
+                this.puntajes[pregunta.carrera] += parseInt(respuesta.value);
+
+                this.paso++;
+
+                this.mostrarPregunta();
+
+            }
+
+            actualizarBarra() {
+
+                let porcentaje = ((this.paso) / this.preguntas.length) * 100;
+
+                document.getElementById("progreso").style.width = porcentaje + "%";
+
+            }
+
+            reiniciarPuntajes() {
+
+                for (let carrera in this.puntajes) {
+                    this.puntajes[carrera] = 0;
+                }
+
+            }
+
+            calcularResultado() {
+
+                let resultados = [];
+
+                for (let carrera in this.puntajes) {
+
+                    resultados.push({
+                        nombre: carrera,
+                        puntos: this.puntajes[carrera]
+                    });
+
+                }
+
+                resultados.sort((a, b) => b.puntos - a.puntos);
+
+                const nombres = {
+                    quimica: "Ingeniería Química",
+                    industrial: "Ingeniería Industrial",
+                    mecatronica: "Ingeniería Mecatrónica",
+                    sistemas: "Ingeniería en Sistemas Computacionales",
+                    administracion: "Ingeniería en Administración",
+                    gestion: "Ingeniería en Gestión Empresarial"
+                };
+
+                window.location.href = `resultado.html?nombre=${encodeURIComponent(localStorage.getItem("nombreAlumno"))}&c1=${encodeURIComponent(nombres[resultados[0].nombre])}&k1=${resultados[0].nombre}&c2=${encodeURIComponent(nombres[resultados[1].nombre])}&k2=${resultados[1].nombre}&c3=${encodeURIComponent(nombres[resultados[2].nombre])}&k3=${resultados[2].nombre}`;
+
+            }
+
+        }
+
+        const app = new TestVocacional();
+
+    </script>
+    <script>
+
+        function leerTexto() {
+
+            speechSynthesis.cancel();
+
+            let texto = `
+    Bienvenido al test vocacional del Tecnológico Nacional de México Campus Atitalaquia.
+    Escribe tu nombre completo y tu edad.
+    Después presiona comenzar test para continuar.
+    Si no rellenas los campos, no se podrá realizar el test.
+    `;
+
+            let voz = new SpeechSynthesisUtterance(texto);
+
+            voz.lang = "es-MX";
+            voz.volume = 1;
+            voz.rate = 1;
+            voz.pitch = 1;
+
+            window.speechSynthesis.speak(voz);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
