@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+
+    <link rel="stylesheet" href="css/resultado.css?v=5">
+
+    <style>
+        .bloqueCarrera {
+            margin-top: 25px;
+        }
+
+        .btnReticula {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 15px;
+            background: #5f77a7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btnReticula:hover {
+            background: #445f8f;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <img src="TecNM_logo.png" class="logo-izq">
+
+        <div class="texto-header">
+            <h2>SII SISTEMA INTEGRAL DE INFORMACIÓN</h2>
+            <h1>TecNM CAMPUS ATITALAQUIA</h1>
+        </div>
+
+        <img src="imgEscudo.png" class="logo-der">
+
+    </header>
+
+    <div class="main">
+
+        <div class="contenedorResultado grande">
+
+            <div class="titulo">
+                <h1>Resultado del Test Vocacional</h1>
+            </div>
+
+            <h3 id="nombreAlumno"></h3>
+
+            <h2>Las carreras más compatibles contigo son:</h2>
+
+            <div class="botonesCarreras">
+
+                <!-- CARRERA 1 -->
+                <div class="bloqueCarrera">
+
+                    <button id="btn1"></button>
+
+                    <a id="pdf1" target="_blank">
+                        <button class="btnReticula">
+                            📄 Ver Retícula
+                        </button>
+                    </a>
+
+                </div>
+
+                <!-- CARRERA 2 -->
+                <div class="bloqueCarrera">
+
+                    <button id="btn2"></button>
+
+                    <a id="pdf2" target="_blank">
+                        <button class="btnReticula">
+                            📄 Ver Retícula
+                        </button>
+                    </a>
+
+                </div>
+
+                <!-- CARRERA 3 -->
+                <div class="bloqueCarrera">
+
+                    <button id="btn3"></button>
+
+                    <a id="pdf3" target="_blank">
+                        <button class="btnReticula">
+                            📄 Ver Retícula
+                        </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <button onclick="volver()">
+                Volver al inicio
+            </button>
+
+            <button onclick="leerTexto()" class="btnVoz">
+                🔊 Escuchar información
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const p = new URLSearchParams(window.location.search);
+
+        const c1 = p.get("c1");
+        const c2 = p.get("c2");
+        const c3 = p.get("c3");
+
+        const k1 = p.get("k1");
+        const k2 = p.get("k2");
+        const k3 = p.get("k3");
+
+        const nombre = p.get("nombre");
+
+        document.getElementById("nombreAlumno").innerText =
+            "Alumno: " + nombre;
+
+        // BOTONES DE CARRERAS
+        const btn1 = document.getElementById("btn1");
+        const btn2 = document.getElementById("btn2");
+        const btn3 = document.getElementById("btn3");
+
+        // BOTONES PDF
+        const pdf1 = document.getElementById("pdf1");
+        const pdf2 = document.getElementById("pdf2");
+        const pdf3 = document.getElementById("pdf3");
+
+        // TEXTO DE BOTONES
+        btn1.innerText = "🥇 " + c1;
+        btn2.innerText = "🥈 " + c2;
+        btn3.innerText = "🥉 " + c3;
+
+        // ABRIR INFORMACIÓN DE CARRERA
+        btn1.onclick = () => {
+            window.location.href = "resultado2.html?carrera=" + k1;
+        };
+
+        btn2.onclick = () => {
+            window.location.href = "resultado2.html?carrera=" + k2;
+        };
+
+        btn3.onclick = () => {
+            window.location.href = "resultado2.html?carrera=" + k3;
+        };
+
+        // PDFS DE RETÍCULAS
+        if (k1 == "industrial") {
+            pdf1.href = "k1rt_industrial.pdf";
+        }
+
+        if (k1 == "quimica") {
+            pdf1.href = "k2rt_quimica.pdf";
+        }
+
+        if (k1 == "mecatronica") {
+            pdf1.href = "k3rt_mecatronica.pdf";
+        }
+
+        if (k1 == "sistemas") {
+            pdf1.href = "k4rt_sistemas.pdf";
+        }
+
+        if (k1 == "administracion") {
+            pdf1.href = "k5rt_administracion.pdf";
+        }
+
+
+
+        if (k2 == "industrial") {
+            pdf2.href = "k1rt_industrial.pdf";
+        }
+
+        if (k2 == "quimica") {
+            pdf2.href = "k2rt_quimica.pdf";
+        }
+
+        if (k2 == "mecatronica") {
+            pdf2.href = "k3rt_mecatronica.pdf";
+        }
+
+        if (k2 == "sistemas") {
+            pdf2.href = "k4rt_sistemas.pdf";
+        }
+
+        if (k2 == "administracion") {
+            pdf2.href = "k5rt_administracion.pdf";
+        }
+
+
+
+        if (k3 == "industrial") {
+            pdf3.href = "k1rt_industrial.pdf";
+        }
+
+        if (k3 == "quimica") {
+            pdf3.href = "k2rt_quimica.pdf";
+        }
+
+        if (k3 == "mecatronica") {
+            pdf3.href = "k3rt_mecatronica.pdf";
+        }
+
+        if (k3 == "sistemas") {
+            pdf3.href = "k4rt_sistemas.pdf";
+        }
+
+        if (k3 == "administracion") {
+            pdf3.href = "k5rt_administracion.pdf";
+        }
+
+        function volver() {
+            window.location.href = "inicio.html";
+        }
+
+    </script>
+
+    <script>
+
+        function leerTexto() {
+
+            speechSynthesis.cancel();
+
+            let texto =
+                "En este apartado veremos que carreras van contigo dependiendo tus habilidades y conocimientos.";
+
+            let voz = new SpeechSynthesisUtterance(texto);
+
+            voz.lang = "es-MX";
+            voz.volume = 1;
+            voz.rate = 1;
+            voz.pitch = 1;
+
+            window.speechSynthesis.speak(voz);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Información de Carrera</title>
+
+    <link rel="stylesheet" href="css/resultado.css">
+</head>
+
+<body>
+
+    <header>
+
+        <img src="TecNM_logo.png" class="logo-izq">
+
+        <div class="texto-header">
+            <h2>SII SISTEMA INTEGRAL DE INFORMACIÓN</h2>
+            <h1>TecNM CAMPUS ATITALAQUIA</h1>
+        </div>
+
+        <img src="imgEscudo.png" class="logo-der">
+
+    </header>
+
+    <div class="main">
+
+        <div class="contenedorResultado">
+
+            <div class="infoCarrera">
+
+                <h1 id="tituloCarrera"></h1>
+
+                <p id="descripcionCarrera" class="descripcion"></p>
+
+                <div class="carrusel">
+
+                    <div class="slides" id="slides"></div>
+
+                    <button class="anterior" onclick="moverSlide(-1)">
+                        ❮
+                    </button>
+
+                    <button class="siguiente" onclick="moverSlide(1)">
+                        ❯
+                    </button>
+
+                </div>
+
+                <div class="materias">
+
+                    <h2>Materias principales</h2>
+
+                    <ul id="listaMaterias"></ul>
+
+                </div>
+                <button class="btnVolver" onclick="volver()">
+                    Volver
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const p = new URLSearchParams(window.location.search);
+
+        const carrera = p.get("carrera");
+
+        const datos = {
+
+            quimica: {
+
+                titulo: "Ingeniería Química",
+
+                imagenes: [
+                    "quimica.jpg",
+                    "quim1.png",
+
+
+                ],
+
+                descripcion:
+                    "Formar profesionistas en Ingeniería Química competentes para investigar, generar y aplicar el conocimiento científico y tecnológico, que le permita identificar y resolver problemas de diseño, operación, adaptación, optimización y administración en industrias químicas y de servicios, con calidad, seguridad, economía, usando racional y eficientemente los recursos naturales, conservando el medio ambiente, cumpliendo el código ético de la profesión y participando en el bienestar del país.",
+
+
+                        materias: [
+                            "Taller de Etica",
+                            "Fundamentos de Investigacion",
+                            "Calculo diferencial",
+                            "Química inorgánica",
+                            "Progamacion",
+                            "Dibujo assistido por computadora",
+                        ]
+
+            },
+
+            industrial: {
+
+                titulo: "Ingeniería Industrial",
+
+                imagenes: [
+                    "industrial.jpg",
+                    "inds2.png",
+                    "inds1.png"
+
+                ],
+
+                descripcion:
+                    "Formar profesionistas, en el campo de la ingeniería industrial, líderes, creativos y emprendedores con visión sistémica, capacidad analítica y competitiva que les permita diseñar, implementar, mejorar, innovar, optimizar y administrar sistemas de producción de bienes y servicios en un entorno global, con enfoque sustentable, ético y comprometido con la sociedad.",
+
+                materias: [
+                    "Fundamentos de Investigacion",
+                    "Taller de Etica",
+                    "calculo diferencial",
+                    "Taller de Herramientas intelectuales",
+                    "Quimica",
+                    "Dibujo industrial"
+                ]
+
+            },
+
+            mecatronica: {
+
+                titulo: "Ingeniería Mecatrónica",
+
+                imagenes: [
+                    "mecatronica.jpg",
+                    "meca1.png",
+
+                ],
+
+                descripcion:
+                    "Formar profesionistas en la ingeniería mecatrónica con capacidad analítica, crítica y creativa que le permita diseñar, proyectar, construir, innovar y administrar equipos y sistemas mecatrónicos en el sector social y productivo; así como integrar, operar y mantenerlos, con un compromiso ético y de calidad en un marco de desarrollo sustentable.",
+
+                materias: [
+                    "Quimica",
+                    "Calculo diferencial",
+                    "Taller de etica",
+                    "Dibujo asistido por computadora",
+                    "Metrologia y normalicacion",
+                    "Fundamentos de Investigacion",
+                ]
+
+            },
+
+            sistemas: {
+
+                titulo: "Ingeniería en Sistemas Computacionales",
+
+                imagenes: [
+                    "sistemas.png",
+                    "sis2.png",
+                    "sis3.png"
+
+                ],
+
+                descripcion:
+                    "Formar profesionistas líderes, analíticos, críticos y creativos, con visión estratégica y amplio sentido ético, capaces de diseñar, implementar y administrar infraestructura computacional para aportar soluciones innovadoras en beneficio de la sociedad, en un contexto global, multidisciplinario y sustentable.",
+
+                materias: [
+                    "Calculo diferencial",
+                    "Fundamentos de programacion",
+                    "Taller de etica",
+                    "Matematicas discretas",
+                    "Taller de administracion",
+                    "Fundamentos de investigacion"
+                ]
+
+            },
+
+            administracion: {
+
+                titulo: "Ingeniería en Administración",
+
+                imagenes: [
+                    "administracion.png",
+                    "admi2.jpg"
+
+                ],
+
+                descripcion:
+                    "Formar profesionales competentes que apliquen la ciencia y la tecnología en la generación, innovación y dirección de empresas, para resolver los desafíos de un entorno globalizado, con una visión emprendedora, ética, humana y de responsabilidad social.",
+
+                materias: [
+                    "Taller de administracion",
+                    "Tecnologias de informacion",
+                    "Contabilidad aplicada a la ingenieria",
+                    "Dinamica social",
+                    "Fundamentos de investigacion",
+                    "Calcuo diferencial",
+                ]
+
+            },
+
+            gestion: {
+
+                titulo: "Ingeniería en Gestión Empresarial",
+
+                imagenes: [
+                    "gestion_empresarial.png",
+                    "gestion2.png"
+                ],
+
+                descripcion:
+                    "La Ingeniería en Gestión Empresarial combina administración, innovación y liderazgo.",
+
+                materias: [
+                    "Innovación",
+                    "Administración",
+                    "Gestión de Proyectos",
+                    "Mercadotecnia",
+                    "Planeación Estratégica",
+                    "Liderazgo"
+                ]
+
+            }
+
+        };
+
+        if (datos[carrera]) {
+
+            document.getElementById("tituloCarrera").innerText =
+                datos[carrera].titulo;
+
+            document.getElementById("descripcionCarrera").innerText =
+                datos[carrera].descripcion;
+
+            const lista = document.getElementById("listaMaterias");
+
+            datos[carrera].materias.forEach(materia => {
+
+                const li = document.createElement("li");
+
+                li.innerText = materia;
+
+                lista.appendChild(li);
+
+            });
+
+            // CARRUSEL
+            const slides = document.getElementById("slides");
+
+            datos[carrera].imagenes.forEach(img => {
+
+                const imagen = document.createElement("img");
+
+                imagen.src = img;
+
+                slides.appendChild(imagen);
+
+            });
+
+        }
+
+        let index = 0;
+
+        function moverSlide(direccion) {
+
+            const slides = document.getElementById("slides");
+
+            const total = slides.children.length;
+
+            index += direccion;
+
+            if (index < 0) {
+                index = total - 1;
+            }
+
+            if (index >= total) {
+                index = 0;
+            }
+
+            slides.style.transform =
+                `translateX(-${index * 100}%)`;
+
+        }
+
+        function volver() {
+            window.history.back();
+        }
+
+
+    </script>
+
+</body>
+
+</html>
